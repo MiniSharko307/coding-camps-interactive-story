@@ -1,0 +1,134 @@
+# Interactive Story Game
+max_health = 100
+current_health = 100
+is_alive = True
+
+def take_damage(damage, death_message):
+    global current_health, is_alive
+    if is_alive:
+        current_health = max(0, current_health - damage)
+        if current_health == 0:
+            is_alive = False
+            print(f"{death_message}")
+            end_game("dead")
+        else:
+            print(f"Player took {damage} damage, current health: {current_health}/{max_health}")
+    else:
+        print("Player is already dead.")
+
+# Example usage:
+# take_damage(30, "a goblin") - This will cause death if current_health is 30
+# take_damage(100, "a dragon") - This will cause death
+
+
+def heal(heal_amount):
+    if current_health == max_health:
+        print("Health is already full. Healing item cannot be used.")
+    else:
+        new_health = min(current_health + heal_amount, max_health)
+        print(f"Player healed to {new_health}/{max_health}.")
+
+# Example usage
+# heal(10) when HP is maximum will print "Health is already full."
+def start_game():
+    print("Welcome to the Interactive Story Game!")
+    print("You are about to embark on an adventure where your choices will shape the story.")
+    print("Let's begin...\n")
+    introduction()
+
+def introduction():
+    heal(100)
+    print("You find yourself at the entrance of a dark forest. It's quiet, too quiet...")
+    print("You pull out your map, but OUCH! you get a papercut.")
+    take_damage(1, "You died! Killed by a.... wait, what? A papercut? But how? And why?")
+    print("Out of pain, you drop the map, and it falls in a puddle of mud.")
+    print("Whelp, too bad.")
+    print("There are two paths ahead of you.")
+    print("1. Take the left path.")
+    print("2. Take the right path.")
+    
+    choice = input("Which path do you choose? (1 or 2): ")
+    
+    if choice == "1":
+        left_path()
+    elif choice == "2":
+        right_path()
+    else:
+        print("Invalid choice. Please choose 1 or 2.")
+        introduction()
+
+def left_path():
+    print("\nYou take the left path and walk deeper into the forest.")
+    print("The trees seem to close in around you, but you press on.")
+    print("Suddenly, you hear a rustling in the bushes.")
+    print("1. Investigate the noise.")
+    print("2. Continue walking cautiously.")
+    
+    choice = input("What do you do? (1 or 2): ")
+    
+    if choice == "1":
+        investigate_noise()
+    elif choice == "2":
+        continue_walking()
+    else:
+        print("Invalid choice. Please choose 1 or 2.")
+        left_path()
+
+def right_path():
+    print("\nYou take the right path and come across a small, peaceful clearing.")
+    print("In the center of the clearing is a mysterious glowing stone.")
+    print("1. Pick up the stone.")
+    print("2. Leave the stone and continue walking.")
+    
+    choice = input("What do you do? (1 or 2): ")
+    
+    if choice == "1":
+        pick_up_stone()
+    elif choice == "2":
+        continue_on_path()
+    else:
+        print("Invalid choice. Please choose 1 or 2.")
+        right_path()
+
+def investigate_noise():
+    print("\nYou slowly approach the bushes and peer inside.")
+    print("A small, harmless rabbit jumps out and scurries away.")
+    print("You chuckle at your nervousness and continue on the path.")
+    end_game("safe")
+
+def continue_walking():
+    print("\nYou decide to ignore the noise and keep walking.")
+    print("Suddenly, the ground beneath you gives way, and you fall into a hidden trap!")
+    take_damage(100, "You died! The reason for you death was a hidden trap.")
+
+def pick_up_stone():
+    print("\nYou pick up the glowing stone, and it pulses with energy.")
+    print("You feel a surge of power and knowledge. This stone could be useful.")
+    end_game("empowered")
+
+def continue_on_path():
+    print("\nYou decide to leave the stone and continue on your journey.")
+    print("The forest begins to thin out, and you see the edge of the forest ahead.")
+    end_game("safe")
+
+def end_game(outcome):
+    if outcome == "safe":
+        print("\nCongratulations! You safely navigate the forest and continue your adventure.")
+    elif outcome == "trapped":
+        print("\nOh no! You fell into a trap and your adventure ends here. Better luck next time!")
+    elif outcome == "empowered":
+        print("\nWith the power of the stone, you feel ready to face any challenge that comes your way. Your adventure continues!")
+
+    print("Thank you for playing the Interactive Story Game!")
+    replay()
+
+def replay():
+    choice = input("\nWould you like to play again? (yes or no): ")
+    
+    if choice.lower() == "yes":
+        start_game()
+    else:
+        print("Goodbye! Thanks for playing.")
+
+# Start the game
+start_game()
