@@ -1,0 +1,25 @@
+import sys
+import time
+
+def print_with_pause(lines, line_delay=2, char_delay=0.05):
+    """
+    Prints multiple lines with a pause before each new line.
+    
+    Args:
+    - lines (list): A list of strings to print.
+    - line_delay (float): The delay between each line in seconds.
+    - char_delay (float): The delay between each character in seconds.
+    """
+    for line in lines:
+        slow_print(line, char_delay)
+        time.sleep(line_delay)
+
+# Example usage
+if __name__ == "__main__":
+    lines1 = [
+        "You enter the room, and everything is silent.",
+        "Suddenly, the door slams shut behind you!",
+        "A chilling breeze sends shivers down your spine..."
+    ]
+    
+    print_with_pause(lines1, line_delay=1, char_delay=0.1)
