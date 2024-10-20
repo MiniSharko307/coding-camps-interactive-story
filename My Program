@@ -105,6 +105,7 @@ def continue_walking():
 
 def pick_up_stone():
     print("\nYou pick up the glowing stone, and it pulses with energy.")
+    heal(100)
     print("You feel a surge of power and knowledge. This stone could be useful.")
     end_game("empowered")
 
@@ -119,7 +120,7 @@ def end_game(outcome):
     elif outcome == "dead":
         print("\nOh no! Your health has hit zero and your adventure ends here. Better luck next time!")
     elif outcome == "empowered":
-        print("\nWith the power of the stone, you feel ready to face any challenge that comes your way. Your adventure continues!")
+        print("\nWith the power of the stone, you feel ready to face any papercut that comes your way. Your adventure continues!")
 
     print("Thank you for playing the Interactive Story Game!")
     replay()
